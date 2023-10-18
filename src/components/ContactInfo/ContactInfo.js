@@ -1,6 +1,6 @@
 // import Wrapper from './ContactInfo.styled'
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/operations';
+import { deleteContact } from '../../redux/auth/operations';
 // import { BsXCircleFill } from "react-icons/bs";
 import {
   ButtonStyle,
@@ -9,9 +9,6 @@ import {
   Span,
 } from './ContactInfo.styled';
 import { ReactComponent as Delete } from '../icons/Delete.svg';
-
-
-
 
 function ContactInfo({ contact }) {
   const dispatch = useDispatch();
@@ -36,6 +33,6 @@ function ContactInfo({ contact }) {
       </ButtonStyle>
     </ItemsStyled>
   );
-};
+}
 
 export default ContactInfo;
