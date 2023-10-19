@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ContactInfo from '../ContactInfo/ContactInfo';
 // import { getContacts, getFilter } from 'redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/auth/operations';
+import { getContactsThunk } from 'redux/contactsOperations';
 import {
   selectFilteredContacts,
   selectIsLoading,
@@ -18,7 +18,7 @@ export function ContactsList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(getContactsThunk());
   }, [dispatch]);
 
   // const showList = filtredContact(contacts, filter)

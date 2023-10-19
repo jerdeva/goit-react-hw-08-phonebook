@@ -4,7 +4,7 @@ import {
   addContactThunk,
   deleteContactThunk,
 } from './contactsOperations';
-import { type } from '@testing-library/user-event/dist/type';
+// import { type } from '@testing-library/user-event/dist/type';
 
 const initialState = {
   items: [],
@@ -18,8 +18,8 @@ const STATUS = {
   REJECTED: 'rejected',
 };
 
-const array = [addContactThunk, deleteContactThunk, getContactsThunk];
-const help = type = array.map(el => el[type]);
+const arrayOfThunk = [addContactThunk, deleteContactThunk, getContactsThunk];
+const helpFn = type => arrayOfThunk.map(el => el[type]);
 const handleFulfilled = state => {
   state.isLoading = false;
   state.error = '';
@@ -61,9 +61,9 @@ const contactsSlice = createSlice({
 
       .addCase(deleteContactThunk.fulfilled, handleFulfilledDel)
 
-      .addMatcher(isAnyOf(...help(PENDING)), handlePending)
-      .addMatcher(isAnyOf(...help(REJECTED)), handleRejected)
-      .addMatcher(isAnyOf(...help(FULFILLED)), handleFulfilled);
+      .addMatcher(isAnyOf(...helpFn(PENDING)), handlePending)
+      .addMatcher(isAnyOf(...helpFn(REJECTED)), handleRejected)
+      .addMatcher(isAnyOf(...helpFn(FULFILLED)), handleFulfilled);
   },
 });
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/auth/operations';
+import { addContactThunk } from '../../redux/contactsOperations';
 import { selectContacts } from '../../redux/selectors';
 import {
   BtnStyle,
@@ -45,7 +45,7 @@ export function FormPhonebook() {
       return;
     }
 
-    dispatch(addContact(contact));
+    dispatch(addContactThunk(contact));
     setName('');
     setPhone('');
   };
