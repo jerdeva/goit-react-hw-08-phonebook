@@ -10,52 +10,28 @@ import {
   Wrapper,
 } from './FormPhonebook.styled';
 
+const initialValues = {
+  name: '',
+  number: '',
+};
+
 export function FormPhonebook() {
+  const { items } = useSelector(getContacts);
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const existedContact = (items, values) => {
+    return items.find(contact => contact.name === values.name);
+  };
 
-    const contact = {
-      name: name,
-      phone: phone,
-    };
-
-    const isContactExist = contacts.find(
-      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-    );
-
-    if (isContactExist) {
-      window.alert(`phone ${contact.name} is already in contacts!`);
+  const handleSubmit = (values, { resetForm }) => {
+    if (existedContact(items, values)) {
+      toast(`${values.name} is already in contacts`);
+      resetForm();
       return;
     }
 
-    const isphoneExist = contacts.find(({ phone }) => {
-      if (contact.phone && typeof contact.phone === 'string' && phone) {
-        return contact.phone.replace(/\D/g, '') === phone.replace(/\D/g, '');
-      }
-      return false;
-    });
-
-    if (isphoneExist) {
-      window.alert(`phone ${contact.phone} is already in contacts!`);
-      return;
-    }
-
-    dispatch(addContactThunk(contact));
-    setName('');
-    setPhone('');
-  };
-
-  const handleNameChange = event => {
-    setName(event.target.value);
-  };
-
-  const handlephoneChange = event => {
-    setPhone(event.target.value);
+    dispatch(addContactThunk(values));
+    resetForm();
   };
 
   return (

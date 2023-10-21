@@ -4,7 +4,6 @@ import {
   addContactThunk,
   deleteContactThunk,
 } from './contactsOperations';
-// import { type } from '@testing-library/user-event/dist/type';
 
 const initialState = {
   items: [],
@@ -20,50 +19,41 @@ const STATUS = {
 
 const arrayOfThunk = [addContactThunk, deleteContactThunk, getContactsThunk];
 const helpFn = type => arrayOfThunk.map(el => el[type]);
-const handleFulfilled = state => {
-  state.isLoading = false;
-  state.error = '';
-}
-
-const handlePending = state => {
-  state.isLoading = true;
-}
-
-
-const handleFulfilledGet = (state, { payload }) => {
-  state.items = payload;
-}
-
-  const handleFulfilledAdd = (state, { payload }) => {
-    state.items.push(payload)
-  }
-
-
-const handleFulfilledDel = (state, { payload }) => {
-    state.items = state.items.filter(el => el.id !== payload.id);
-}
-
-const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = payload;
-};
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialState,
+  reducers: {}, // You can define regular reducers here if needed
+
   extraReducers: builder => {
     const { PENDING, FULFILLED, REJECTED } = STATUS;
     builder
-
-      .addCase(getContactsThunk.fulfilled, handleFulfilledGet)
-
-      .addCase(addContactThunk.fulfilled, handleFulfilledAdd)
-
-      .addCase(deleteContactThunk.fulfilled, handleFulfilledDel)
-
-      .addMatcher(isAnyOf(...helpFn(PENDING)), handlePending)
-      .addMatcher(isAnyOf(...helpFn(REJECTED)), handleRejected)
-      .addMatcher(isAnyOf(...helpFn(FULFILLED)), handleFulfilled);
+      .addCase(getContactsThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(addContactThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items.push(action.payload);
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = state.items.filter(el => el.id !== action.payload.id);
+      })
+      .addMatcher(isAnyOf(...helpFn(PENDING)), state => {
+        state.isLoading = true;
+      })
+      .addMatcher(isAnyOf(...helpFn(REJECTED)), (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addMatcher(isAnyOf(...helpFn(FULFILLED)), state => {
+        state.isLoading = false;
+        state.error = null;
+      });
   },
 });
 
