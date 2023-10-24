@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContactThunk } from 'redux/contacts/operations';
+import {Wrapper, ButtonStyle, Paragrapher, Span} from './ContactInfo.styled'
 
 const Contact = ({ contact }) => {
   const { id, name, number } = contact;
@@ -9,12 +10,10 @@ const Contact = ({ contact }) => {
   const handleDelete = () => dispatch(deleteContactThunk(id));
 
   return (
-    <p>
-      <span>{name}:</span> {number}
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
-    </p>
+    <Wrapper>
+      <Paragrapher><Span>{name}:</Span> {number}</Paragrapher>
+            <ButtonStyle type="button" onClick={handleDelete}> Delete</ButtonStyle>
+      </Wrapper>
   );
 };
 

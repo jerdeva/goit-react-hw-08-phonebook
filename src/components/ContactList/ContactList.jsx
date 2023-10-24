@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, selectVisibleContacts } from 'redux/selectors';
-
+import {List, ItemsStyled} from './ContatctList.styled'
 import Contact from 'components/Contact/Contact';
 import { useEffect } from 'react';
 import { getContactsThunk } from 'redux/contacts/operations';
@@ -22,15 +22,15 @@ export default function ContactList() {
       <ToastContainer autoClose={1500} />
       {isLoading && <Loader />}
       {Array.isArray(visibleContacts) && (
-        <div>
+        <List>
           {visibleContacts.map(item => {
             return (
-              <li key={item.id}>
+              <ItemsStyled key={item.id}>
                 <Contact contact={item} />
-              </li>
+              </ItemsStyled>
             );
           })}
-        </div>
+        </List>
       )}
       {error && <h2>{error}</h2>}
     </>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const  List = styled.ul`
+export const  List = styled.ul`
 list-style:none;
 margin: 8px;
 padding: 0;
@@ -12,6 +12,15 @@ gap: 32px;
 padding: 12px;
 `
 
+export const ItemsStyled = styled.li`
+  border: 1px solid green;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: lightyellow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 
 
-export default List;
+// export default List;

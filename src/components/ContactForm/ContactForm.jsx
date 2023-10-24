@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { Field, ErrorMessage } from 'formik';
+import {FormikSt} from './ContactForm.styled'
 
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -60,9 +61,9 @@ export default function ContactForm() {
       validationSchema={schema}
     >
       <Form autoComplete="off">
-        <div>
+        <FormikSt>
           <label htmlFor="name">Name</label>
-          <Field type="text" name="name" id="name" placeholder="Jacob Mercer" />
+          <Field  type="text" name="name" id="name" placeholder="Adrian" />
           <ErrorMessage name="name" component="div" />
 
           <label htmlFor="number">Phone</label>
@@ -70,11 +71,11 @@ export default function ContactForm() {
             type="tel"
             name="number"
             id="number"
-            placeholder="080-111-77-55"
+            placeholder="000-111-22-33"
           />
           <ErrorMessage name="number" component="div" />
           <button type="submit">add contact</button>
-        </div>
+        </FormikSt>
       </Form>
     </Formik>
   );
