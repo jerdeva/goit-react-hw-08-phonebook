@@ -1,19 +1,21 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectContacts = state => state.contacts.items;
-export const selectFilter = state => state.filter;
-export const selectIsLoading = state => state.contacts.isLoading;
-export const selectError = state => state.contacts.error;
+export const getContacts = state => state.contacts;
+export const getFilterValue = state => state.filter.filter;
 
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectFilter],
+// оптимізуємо за допомогою craeteSelector
+export const selectVisibleContacts = createSelector(
+  [getContacts, getFilterValue],
   (contacts, filter) => {
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.items.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
   }
 );
 
+// auth
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 
 export const selectUser = state => state.auth.user;
