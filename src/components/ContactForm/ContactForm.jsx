@@ -1,9 +1,11 @@
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import React from 'react';
-import { toast } from 'react-toastify';
-import { Field, ErrorMessage } from 'formik';
-import {FormikSt} from './ContactForm.styled'
+// import { toast } from 'react-toastify';
+import Notiflix from 'notiflix';
+
+// import { Field } from 'formik';
+import {FormikSt, ErrorM, FieldSt, BTN, Label} from './ContactForm.styled'
 
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,8 +48,8 @@ export default function ContactForm() {
 
   const handleSubmit = (values, { resetForm }) => {
     if (existedContact(items, values)) {
-      toast(`${values.name} is already in contacts`);
-      resetForm();
+      Notiflix.Notify.failure(`${values.name} is already in contacts`);
+      // resetForm();
       return;
     }
 
@@ -62,19 +64,19 @@ export default function ContactForm() {
     >
       <Form autoComplete="off">
         <FormikSt>
-          <label htmlFor="name">Name</label>
-          <Field  type="text" name="name" id="name" placeholder="Adrian" />
-          <ErrorMessage name="name" component="div" />
+          <Label htmlFor="name">Name</Label>
+          <FieldSt  type="text" name="name" id="name" placeholder="Adrian" />
+          <ErrorM name="name" component="div" />
 
-          <label htmlFor="number">Phone</label>
-          <Field
+          <Label htmlFor="number">Phone</Label>
+          <FieldSt
             type="tel"
             name="number"
             id="number"
             placeholder="000-111-22-33"
           />
-          <ErrorMessage name="number" component="div" />
-          <button type="submit">add contact</button>
+          <ErrorM name="number" component="div" />
+          <BTN type="submit">add contact</BTN>
         </FormikSt>
       </Form>
     </Formik>

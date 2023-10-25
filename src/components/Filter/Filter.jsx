@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/selectors';
 import { setFilterValue } from 'redux/filter/slice';
-import {WrapperForInput} from './Filter.styled'
+import {WrapperForInput, Input, WrapperForSearch} from './Filter.styled'
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -13,10 +13,10 @@ export default function Filter() {
   };
 
   return (
-    <div>
+    <WrapperForSearch>
       <label htmlFor="filter">Find contacts by name</label>
       <WrapperForInput>
-      <input
+      <Input
         type="text"
         value={filterValue}
         id="filter"
@@ -24,6 +24,6 @@ export default function Filter() {
         placeholder="Jacob Mercer"
         />
         </WrapperForInput>
-    </div>
+    </WrapperForSearch>
   );
 }

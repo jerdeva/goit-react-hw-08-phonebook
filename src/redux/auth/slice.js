@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './operations';
+import { registr, logIn, logOut, refreshUser } from './operations';
 import { authInitialState } from '../../redux/initial';
 
 const authSlice = createSlice({
@@ -7,7 +7,7 @@ const authSlice = createSlice({
   initialState: authInitialState,
   extraReducers: builder =>
     builder
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(registr.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;

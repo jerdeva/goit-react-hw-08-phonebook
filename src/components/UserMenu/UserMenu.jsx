@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {Paragrapher,BTN} from './UserMenu.styled.js'
+import {Paragrapher,BTN,Wrapper} from './UserMenu.styled.js'
 import { useAuth } from 'hooks/useAuth';
 import { logOut } from 'redux/auth/operations';
 
@@ -11,12 +11,16 @@ export const UserMenu = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
+      <div>
       <Paragrapher>Welcome, {user.name}</Paragrapher>
-      <Paragrapher>{ user.email}</Paragrapher>
+        <Paragrapher>{user.email}</Paragrapher>
+        </div>
+      <div>
       <BTN  type="button" onClick={handleLogOut}>
         Logout
-      </BTN>
-    </div>
+        </BTN>
+        </div>
+    </Wrapper>
   );
 };

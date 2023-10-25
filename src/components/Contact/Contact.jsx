@@ -10,9 +10,10 @@ const Contact = ({ contact }) => {
   const handleDelete = () => dispatch(deleteContactThunk(id));
 
   return (
+
     <Wrapper>
       <Paragrapher><Span>{name}:</Span> {number}</Paragrapher>
-            <ButtonStyle type="button" onClick={handleDelete}> Delete</ButtonStyle>
+      <ButtonStyle type="button" onClick={handleDelete}> Delete</ButtonStyle>
       </Wrapper>
   );
 };
