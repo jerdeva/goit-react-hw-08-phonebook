@@ -1,5 +1,3 @@
-import { AppBar } from "components/AppBar/AppBar";
-
 const styles = {
   container: {
     minHeight: 'calc(80vh - 20px)',
@@ -21,11 +19,10 @@ export default function Home() {
     <div style={styles.container}>
       <h1 style={styles.title}>
         Welcome to contacts! <br/>Log in to your account or create a new one.{' '}
-        {/* <span role="img" aria-label="Greeting icon">
+        <span role="img" aria-label="Greeting icon">
           👨‍👩‍👧‍👦
-        </span> */}
+        </span>
       </h1>
-      <AppBar/>
     </div>
   );
 }

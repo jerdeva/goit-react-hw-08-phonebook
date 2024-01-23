@@ -18,4 +18,6 @@ margin-bottom:8px;
 export const NavSt = styled.nav`
   border-bottom: 1px solid #2a363b;
   margin: 36px 0;
+  display: flex;
+  justify-content: space-around;
 `;
